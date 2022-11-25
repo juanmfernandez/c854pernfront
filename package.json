@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "start": "react-scripts start",
-    "build": "rm -r _static 2>/dev/null; node src/app.tsx; react-scripts build && mv build _static",
+    "build": "rm -r _static 2>/dev/null; react-scripts build && mv build _static",
     "preview": "vite preview"
   },
   "dependencies": {
