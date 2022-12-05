@@ -1,0 +1,1 @@
+import{S as r}from"./sweetalert2.all.ecbcf1cd.js";const n=o=>{r.mixin({showConfirmButton:!1,timer:3e3}).fire({icon:"error",title:o})},e=(o,s)=>{r.mixin({showConfirmButton:!1,timer:2e3,iconColor:"#13C296"}).fire({icon:"success",title:o,text:s})},c=o=>{r.fire({icon:"error",title:"Oops...",text:o})};export{n as E,e as S,c as a};
