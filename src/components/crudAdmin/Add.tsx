@@ -1,5 +1,5 @@
 import { ChangeEvent,useState, } from "react";
-import { postRequest } from "../../services/httpRequest";
+import { postRequest, postRequestData } from "../../services/httpRequest";
 import { ErrorFormAdmin, Success } from "../../utils/notification";
 
 export interface inputs  {
@@ -66,7 +66,7 @@ const Add = () => {
     // }
 
       e.preventDefault()
-      postRequest(formData,'/products/save')
+      postRequestData(formData,'/products/save')
       //if(input.productName === "" && input.description === "" && input.price === 0 && input.quantityInStock === 0) {
       if(productName === "" && description === "" && price === "" && quantityInStock === "") {
         ErrorFormAdmin('Faltan campos que relllenar')
