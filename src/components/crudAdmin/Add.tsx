@@ -87,7 +87,7 @@ const Add = () => {
           className="form-inputs "
           //onChange={handleChange}
           onChange={(e) => setpProductName(e.target.value)}
-          value={productName}
+          value={productName as string}
         />
         <input
           type="text"
@@ -96,7 +96,7 @@ const Add = () => {
           className="form-inputs"
           //onChange={handleChange}
           onChange={(e) => setDescription(e.target.value)}
-          value={description}
+          value={description as string}
 
         />
         <input
@@ -106,7 +106,7 @@ const Add = () => {
           className="form-inputs"
           //onChange={handleChange}
           onChange={(e) => setQuantityInStock(e.target.value)}
-          value={quantityInStock}
+          value={quantityInStock as string}
 
         />
         <input
@@ -116,7 +116,7 @@ const Add = () => {
           className="form-inputs"
           //onChange={handleChange}
           onChange={(e) => setPrice(e.target.value)}
-          value={price}
+          value={price  as string}
 
         />
 
@@ -148,7 +148,7 @@ const Add = () => {
         </div>
         <input id="dropzone-file" type="file" className="hidden" name="productPic" 
         //onChange={handleProductPicChange}
-        onChange={(e) => setProductPic(e.target.files[0])}
+        onChange={(e) => setProductPic(e.target.files? e.target.files[0] : "")}
         />
       </label>
     </div>
