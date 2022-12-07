@@ -11,7 +11,7 @@ import Cart from "../Cart/Cart";
 interface HomeProps {
   width: number;
   setWidth: Dispatch<number>;
-  setIsOpen: any
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
 }
 
 const Navbar: FC<HomeProps> = ({ width, setWidth, setIsOpen }) => {
