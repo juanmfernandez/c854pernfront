@@ -10,7 +10,8 @@ export const postRequest = async (userData: {}, endpoint: string) => {
   try {
     const { data } = await axios.post(URL + endpoint, userData, {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
+        //"Content-Type": "application/json",
         Accept: "application/json",
         Authorization,
       },

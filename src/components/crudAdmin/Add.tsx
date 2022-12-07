@@ -7,7 +7,7 @@ export interface inputs  {
   description:string,
   quantityInStock: number,
   price: number,
-  img?:[{}]
+  productPic?:[{}]
 }
 
 export type files  = FormData
@@ -20,32 +20,61 @@ const Add = () => {
     description:'',
     quantityInStock:0,
     price:0,
+    productPic:[{}]
   })
+  const [productName, setpProductName] = useState<string | Blob>("")
+  const [description, setDescription] = useState<string | Blob>("")
+  const [quantityInStock, setQuantityInStock] = useState<string | Blob>("")
+  const [price, setPrice] = useState<string | Blob>("")
+  const [productPic, setProductPic] = useState<string | Blob>("")
+
+  const formDataCreate = new FormData();
   const handleChange = (event: ChangeEvent<HTMLInputElement> ) =>{
     let value: typeof input[keyof typeof input] = event.target.value
+    formDataCreate.append("productName", event.target.value)
     setInput({ ...input, [event.target.name]: value })
-  }
+  }  
   const handleImage = (event:ChangeEvent<HTMLInputElement>) => {
     const img = event.currentTarget.files
-
+    formDataCreate.getAll('productPic')
     if(img){
-      const formData:any = new FormData();
-      formData.append('img',img)
+      const formData = new FormData();
+      formData.getAll('productPic')
+      input.productPic?.push(formData.getAll('productPic'))
     }
-    setInput({...input,...img})
+    
+    setInput({...input})
+    
   }
-  console.log(input)
+  let len: number | 0
+  const handleProductPicChange = (event: ChangeEvent<HTMLInputElement> ) =>{
+    console.log(event.currentTarget.files?.length)
+    len = event.currentTarget.files?.length? event.currentTarget.files?.length : 0;
+    //setProductPic(event.currentTarget.files[0]?)
+  }
+  console.log(input.productPic)
   const handleSubmit = (e:ChangeEvent<HTMLFormElement>) => {
+    const formData = new FormData();
+    formData.append("productName", productName);
+    formData.append("description", description);
+    formData.append("quantityInStock", quantityInStock);
+    formData.append("price", price);
+
+    formData.append("productPic", productPic);
+    // for (let i = 0 ; i < len; i++) {
+    //   formData.append("productPic[]", productPic?[i] ? productPic?[i] : 0:0:1);
+    // }
+
       e.preventDefault()
-      postRequest(input,'/products/save')
-      if(input.productName === "" && input.description === "" && input.price === 0 && input.quantityInStock === 0) {
+      postRequest(formData,'/products/save')
+      //if(input.productName === "" && input.description === "" && input.price === 0 && input.quantityInStock === 0) {
+      if(productName === "" && description === "" && price === "" && quantityInStock === "") {
         ErrorFormAdmin('Faltan campos que relllenar')
       }
       else {
         Success('Su producto se generó correctamente', '😁')
       }
   }
-
   
   return (
     <div className=" flex p-2 flex-col gap-10 w-[100%]  md:items-end  h-screen">
@@ -56,16 +85,18 @@ const Add = () => {
           name="productName"
           placeholder="Nombre del producto"
           className="form-inputs "
-          onChange={handleChange}
-          value={input.productName}
+          //onChange={handleChange}
+          onChange={(e) => setpProductName(e.target.value)}
+          value={productName}
         />
         <input
           type="text"
           name="description"
           placeholder="Descripcion"
           className="form-inputs"
-          onChange={handleChange}
-          value={input.description}
+          //onChange={handleChange}
+          onChange={(e) => setDescription(e.target.value)}
+          value={description}
 
         />
         <input
@@ -73,8 +104,9 @@ const Add = () => {
           name="quantityInStock"
           placeholder="Cantidad Disponible"
           className="form-inputs"
-          onChange={handleChange}
-          value={input.quantityInStock}
+          //onChange={handleChange}
+          onChange={(e) => setQuantityInStock(e.target.value)}
+          value={quantityInStock}
 
         />
         <input
@@ -82,8 +114,9 @@ const Add = () => {
           name="price"
           placeholder="Precio"
           className="form-inputs"
-          onChange={handleChange}
-          value={input.price}
+          //onChange={handleChange}
+          onChange={(e) => setPrice(e.target.value)}
+          value={price}
 
         />
 
@@ -113,7 +146,10 @@ const Add = () => {
             SVG, PNG, JPG  (MAX. 800x400px)
           </p>
         </div>
-        <input id="dropzone-file" type="file" className="hidden" name="file" multiple onChange={handleImage}/>
+        <input id="dropzone-file" type="file" className="hidden" name="productPic" 
+        //onChange={handleProductPicChange}
+        onChange={(e) => setProductPic(e.target.files[0])}
+        />
       </label>
     </div>
         <div className="flex gap-3 md:w-2/5  w-3/4">

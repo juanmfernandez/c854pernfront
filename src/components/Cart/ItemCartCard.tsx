@@ -10,7 +10,7 @@ export type CartItem = {
     size: string
     price: number
     img?: string | undefined
-    ProductImgs?: Array<any> | undefined
+    ProductImgs?: Array<any | string[]>
 }
 const ItemCartCard = ({productName, id, color, size, price, img}: CartItem) => {
 
