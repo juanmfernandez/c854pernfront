@@ -30,7 +30,6 @@ export const postRequestData = async (userData: {}, endpoint: string) => {
     const { data } = await axios.post(URL + endpoint, userData, {
       headers: {
         "Content-Type": "multipart/form-data",
-        //"Content-Type": "application/json",
         Accept: "application/json",
         Authorization,
       },
@@ -39,6 +38,7 @@ export const postRequestData = async (userData: {}, endpoint: string) => {
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
+      console.log(error?.response?.data.error)
       throw new Error(error.message);
     } else {
       return "An unexpected error occurred";
