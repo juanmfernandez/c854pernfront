@@ -130,37 +130,19 @@ const Add = () => {
           value={price as string}
         />
         <div className="flex md:w-max md:gap-5 w-[100%] justify-center">
-          <select
-            name="categories"
-            onChange={hanldeCategoriesChange}
-            className="border-2  shadow-2xl  text-sm rounded-lg    block w-max p-2.5   dark:text-[#aaaaaa]  "
-          >
+          <select name="categories" onChange={hanldeCategoriesChange}>
             {stateCategories.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.categoryName}
-              </option>
+              <option key={item.id} value={item.id}>{item.categoryName}</option>
             ))}
           </select>
-          <select
-            name="colours"
-            onChange={handleColours}
-            className="border-2  shadow-2xl  text-sm rounded-lg    block w-max p-2.5   dark:text-[#aaaaaa]  "
-          >
+          <select name="colours" onChange={handleColours}>
             {stateColours.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.colourName}
-              </option>
+              <option key={item.id} value={item.id}>{item.colourName}</option>
             ))}
           </select>
-          <select
-            name="size"
-            onChange={handleSize}
-            className="border-2  shadow-2xl  text-sm rounded-lg    block w-max p-2.5   dark:text-[#aaaaaa]  "
-          >
+          <select name="size" onChange={handleSize}>
             {stateSizes.map((item) => (
-              <option key={item.id} value={item.id}>
-                {item.sizeLetter}
-              </option>
+              <option key={item.id} value={item.id}>{item.sizeLetter}</option>
             ))}
           </select>
         </div>
